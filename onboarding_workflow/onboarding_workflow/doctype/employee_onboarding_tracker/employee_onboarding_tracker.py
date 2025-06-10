@@ -7,40 +7,35 @@ from frappe.utils import getdate, nowdate
 
 class EmployeeOnboardingTracker(Document):
     def validate(self):
-        # Check for incomplete tasks when status is Completed
         if self.status == "Completed":
             incomplete = [row.task for row in self.checklist if not row.is_completed]
             if incomplete:
-                frappe.throw(f"❌ Tracker cannot be marked as Completed. These tasks are still pending: {', '.join(incomplete)}")
+                frappe.throw(f"Tracker cannot be marked as Completed. These tasks are still pending: {', '.join(incomplete)}")
 
-        # Fetch manually entered required assets from the tracker
         required_asset = self.required_asset or []
 
-        # Auto generate Material Request if stock is less
         for asset in required_asset:
             if not asset.asset_name or not asset.quantity:
-                continue  # Skip if incomplete row
+                continue
 
-            # Use needed_by date from required_asset; fallback to current date if empty
             schedule_date = asset.needed_by
             if not schedule_date:
-                schedule_date = nowdate()  # Fallback to current date if needed_by is empty
+                schedule_date = nowdate()  
             elif getdate(schedule_date) < getdate(nowdate()):
-                schedule_date = nowdate()  # Use current date if needed_by is in the past
-
+                schedule_date = nowdate()  
             actual_qty = frappe.db.get_value("Bin", {"item_code": asset.asset_name}, "actual_qty") or 0
             if actual_qty < asset.quantity:
                 try:
                     mr = frappe.get_doc({
                         "doctype": "Material Request",
                         "material_request_type": "Purchase",
-                        "transaction_date": nowdate(),  # Explicitly set transaction_date
-                        "schedule_date": schedule_date,  # Set to needed_by or current date
+                        "transaction_date": nowdate(),  
+                        "schedule_date": schedule_date,  
                         "items": [
                             {
                                 "item_code": asset.asset_name,
                                 "qty": asset.quantity,
-                                "schedule_date": schedule_date  # Set to needed_by or current date
+                                "schedule_date": schedule_date
                             }
                         ]
                     })

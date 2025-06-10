@@ -1,41 +1,122 @@
-### Onboarding Workflow
+# 🛠️ ERPNext Custom App: Employee Onboarding Workflow
 
-Onboarding Workflow
+A custom ERPNext application built to streamline the employee onboarding process — assigning tasks, tracking progress, sending notifications, and handling required asset procurement.
 
-### Installation
+---
 
-You can install this app using the [bench](https://github.com/frappe/bench) CLI:
-
-```bash
-cd $PATH_TO_YOUR_BENCH
-bench get-app $URL_OF_THIS_REPO --branch develop
-bench install-app onboarding_workflow
-```
-
-### Contributing
-
-This app uses `pre-commit` for code formatting and linting. Please [install pre-commit](https://pre-commit.com/#installation) and enable it for this repository:
+## 📦 Installation
 
 ```bash
-cd apps/onboarding_workflow
-pre-commit install
+# Clone the repo into your bench directory
+cd frappe-bench/apps
+git clone https://github.com/Muhammadshahzad48/onboarding_workflow.git
+
+# Install the app on your site
+bench --site your-site-name install-app onboarding_workflow
 ```
 
-Pre-commit is configured to use the following tools for checking and formatting your code:
+---
 
-- ruff
-- eslint
-- prettier
-- pyupgrade
+## 🧾 Features Implemented
 
-### CI
+### ✅ 1. Auto Tracker Creation
+- When a new Employee is created, the app auto-generates an **Employee Onboarding Tracker** with:
+  - Job title
+  - Department
+  - Joining date
+  - Assigned checklist
 
-This app can use GitHub Actions for CI. The following workflows are configured:
+### ✅ 2. Checklist from Template
+- Tasks are pulled dynamically based on **job title** from the **Checklist Template** doctype.
 
-- CI: Installs this app and runs unit tests on every push to `develop` branch.
-- Linters: Runs [Frappe Semgrep Rules](https://github.com/frappe/semgrep-rules) and [pip-audit](https://pypi.org/project/pip-audit/) on every pull request.
+### ✅ 3. Email Notifications
+- Automatic emails are sent to users assigned to tasks in the checklist.
 
+### ✅ 4. Required Asset Table
+- You can manually enter items (like laptop, mouse, etc.) required for onboarding.
 
-### License
+### ✅ 5. Material Request Auto-Creation
+- If stock is low for any required asset, a **Material Request** is auto-generated to the Purchase department.
 
-mit
+### ✅ 6. Workflow Integration
+- Status of Onboarding Tracker updates from:
+  - Draft → Assigned → In Progress → Completed
+- A validation ensures status cannot change to `Completed` unless all checklist tasks are marked done.
+
+---
+
+## 🧱 Custom Doctypes
+
+| Doctype                  | Description                              |
+|--------------------------|------------------------------------------|
+| Employee Onboarding Tracker | Main tracker linked to Employee         |
+| Checklist Template       | Template by job title                    |
+| Checklist Template Task  | Child table of tasks for template        |
+| Checklist Task           | Child table in tracker with user assignments |
+| Required Asset           | Items/assets needed during onboarding    |
+
+---
+
+## 📸 Screenshots
+
+### 🎯 Checklist Template
+
+![Checklist Template](assets/checklist_template.png)
+
+### 👤 Employee Creation
+
+![Employee](assets/employee.png)
+
+### 📋 Employee Onboarding Tracker
+
+![Employee Onboarding Tracker](assets/employee_onboarding_tracker.png)
+
+### 📬 Email Notification Sent
+
+![Email Notification](assets/email.png)
+
+### 🧾 Material Request Auto-Created
+
+![Material Request](assets/material_request.png)
+
+Make sure all images are located inside:
+```
+/apps/onboarding_workflow/assets/
+```
+
+---
+
+## 🔁 Hook Integration
+
+**Trigger:**  
+`after_insert` hook on the `Employee` doctype.
+
+**Function Called:**  
+```python
+onboarding_workflow.custom.custom_employee.create_onboarding_tracker
+```
+
+---
+
+## 🚀 How to Use
+
+1. Create a **Checklist Template** with tasks for a specific job title.
+2. Add assignees to each task in the child table.
+3. Create a new **Employee** document.
+4. A corresponding **Employee Onboarding Tracker** will be auto-created.
+5. You can manually enter any required assets (e.g., Laptop, Mouse).
+6. Emails are automatically sent to the task owners.
+7. If stock of any required asset is low, a **Material Request** will be submitted.
+
+---
+
+## 👨‍💻 Author
+
+**Muhammad Shahzad**  
+GitHub: [@Muhammadshahzad48](https://github.com/Muhammadshahzad48)
+
+---
+
+## 📝 License
+
+MIT License

@@ -1,0 +1,103 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "EOT-.#####",
+ "creation": "2025-06-02 17:45:03.843532",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "job_title",
+  "status",
+  "column_break_opzs",
+  "department",
+  "joining_date",
+  "section_break_onum",
+  "checklist",
+  "section_break_qfyh",
+  "required_asset"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "job_title",
+   "fieldtype": "Data",
+   "label": "Job Title"
+  },
+  {
+   "fieldname": "joining_date",
+   "fieldtype": "Date",
+   "label": "Joining Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nAssigned\nIn Progress\nCompleted"
+  },
+  {
+   "fieldname": "column_break_opzs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_onum",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_qfyh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "required_asset",
+   "fieldtype": "Table",
+   "label": "Required Asset",
+   "options": "Required Asset"
+  },
+  {
+   "fieldname": "checklist",
+   "fieldtype": "Table",
+   "label": "Checklist Task",
+   "options": "Checklist Task"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-06-09 15:04:53.750537",
+ "modified_by": "Administrator",
+ "module": "Onboarding Workflow",
+ "name": "Employee Onboarding Tracker",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

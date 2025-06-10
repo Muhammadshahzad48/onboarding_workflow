@@ -137,13 +137,16 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
+doc_events = {
+    "Employee": {
+        "after_insert": "onboarding_workflow.custom.custom_employee.create_onboarding_tracker"
+    },
 # 	"*": {
 # 		"on_update": "method",
 # 		"on_cancel": "method",
 # 		"on_trash": "method"
 # 	}
-# }
+}
 
 # Scheduled Tasks
 # ---------------

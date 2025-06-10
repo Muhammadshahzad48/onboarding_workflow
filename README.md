@@ -1,10 +1,10 @@
-# 🛠️ ERPNext Custom App: Employee Onboarding Workflow
+# ERPNext Custom App: Employee Onboarding Workflow
 
 A custom ERPNext application built to streamline the employee onboarding process — assigning tasks, tracking progress, sending notifications, and handling required asset procurement.
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```bash
 # Clone the repo into your bench directory
@@ -17,35 +17,35 @@ bench --site your-site-name install-app onboarding_workflow
 
 ---
 
-## 🧾 Features Implemented
+## Features Implemented
 
-### ✅ 1. Auto Tracker Creation
+### 1. Auto Tracker Creation
 - When a new Employee is created, the app auto-generates an **Employee Onboarding Tracker** with:
   - Job title
   - Department
   - Joining date
   - Assigned checklist
 
-### ✅ 2. Checklist from Template
+### 2. Checklist from Template
 - Tasks are pulled dynamically based on **job title** from the **Checklist Template** doctype.
 
-### ✅ 3. Email Notifications
+### 3. Email Notifications
 - Automatic emails are sent to users assigned to tasks in the checklist.
 
-### ✅ 4. Required Asset Table
+### 4. Required Asset Table
 - You can manually enter items (like laptop, mouse, etc.) required for onboarding.
 
-### ✅ 5. Material Request Auto-Creation
+### 5. Material Request Auto-Creation
 - If stock is low for any required asset, a **Material Request** is auto-generated to the Purchase department.
 
-### ✅ 6. Workflow Integration
+### 6. Workflow Integration
 - Status of Onboarding Tracker updates from:
   - Draft → Assigned → In Progress → Completed
 - A validation ensures status cannot change to `Completed` unless all checklist tasks are marked done.
 
 ---
 
-## 🧱 Custom Doctypes
+## Custom Doctypes
 
 | Doctype                  | Description                              |
 |--------------------------|------------------------------------------|
@@ -57,25 +57,25 @@ bench --site your-site-name install-app onboarding_workflow
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
-### 🎯 Checklist Template
+### Checklist Template
 
 ![Checklist Template](assets/checklist_template.png)
 
-### 👤 Employee Creation
+### Employee Creation
 
 ![Employee](assets/employee.png)
 
-### 📋 Employee Onboarding Tracker
+### Employee Onboarding Tracker
 
 ![Employee Onboarding Tracker](assets/employee_onboarding_tracker.png)
 
-### 📬 Email Notification Sent
+### Email Notification Sent
 
 ![Email Notification](assets/email.png)
 
-### 🧾 Material Request Auto-Created
+### Material Request Auto-Created
 
 ![Material Request](assets/material_request.png)
 
@@ -86,7 +86,7 @@ Make sure all images are located inside:
 
 ---
 
-## 🔁 Hook Integration
+## Hook Integration
 
 **Trigger:**  
 `after_insert` hook on the `Employee` doctype.
@@ -98,7 +98,7 @@ onboarding_workflow.custom.custom_employee.create_onboarding_tracker
 
 ---
 
-## 🚀 How to Use
+## How to Use
 
 1. Create a **Checklist Template** with tasks for a specific job title.
 2. Add assignees to each task in the child table.
@@ -110,13 +110,13 @@ onboarding_workflow.custom.custom_employee.create_onboarding_tracker
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **Muhammad Shahzad**  
 GitHub: [@Muhammadshahzad48](https://github.com/Muhammadshahzad48)
 
 ---
 
-## 📝 License
+## License
 
 MIT License
